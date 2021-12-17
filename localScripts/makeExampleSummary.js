@@ -104,7 +104,7 @@ list.forEach(function(file) {
    
 })
 
-//write out the cmplete bundle
+//write out the complete bundle
 //fs.writeFileSync("./bundle.json",JSON.stringify(bundle))
 
 //look for compositions
@@ -293,10 +293,11 @@ function processComposition(comp) {
     })
 
     //if there's a dataserver, then save the Bundle to it. Only works from my machine (has the sync-request library)
-
+    // FIX THIS: TRY A GLOBAL INSTALL (sudo npm install -g sync-request) or use dotenv (we used a global packae installation here)
     if (dataServer) {
         let url = dataServer + "Bundle/" + bundle.id;
-        let syncRequest = require('../../scripts/node_modules/sync-request');
+        // let syncRequest = require('../../scripts/node_modules/sync-request');
+        let syncRequest = require('sync-request');
 
         let options = {};
         options.headers = {"content-type": "application/json+fhir"}
