@@ -15,7 +15,7 @@ let examplePath =  './input/examples'
 //where to write out the bundles (that represent the document examples). The IG publisher can pick them up from there
 let arBundleOutputFolder = ['./input/examples/','./input/examples/'];            //where to save a bundle
 
-let outFileName = './fsh/ig-data/input/pagecontent/examples.md';
+let outFileName = './input/fsh/ig-data/input/pagecontent/examples.md';
 let outFileName2 = './input/pagecontent/examples.md';      //also put a copy directly in the IG input - otherwise have to run sushi again
 let bundleServer = "http://clinfhir.com/fhir/";          //root for full url
 
