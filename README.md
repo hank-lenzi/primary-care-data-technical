@@ -23,6 +23,8 @@ NOTE: This is a fork. We kept the README.md :-)
 * The 'runSushi' script also executes a local javascript script that does a couple of things:
     * It creates a file - examples.md - that has a list of all examples ordered by the profile
     * It creates a Bundle resource for each Composition (found in the examples\composition folder) that contains all the resource instances references by the Composition. Each bundle is added to the examples.md file using a format that allows easy navigation within the bundle.
+* NOTE: presupposes node.js module sync-request is installed (https://www.npmjs.com/package/sync-request)
+
 
 
 ## Folder structure
