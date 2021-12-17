@@ -1,11 +1,12 @@
 # Primary care summary
 
-Specifies the structure of a FHIR document to exchange a clinical summary for a patient between primary care practices
+Specifies the structure of a FHIR document to exchange a clinical summary for a patient between primary care practices.
+NOTE: This is a fork. We kept the README.md :-)
 
 ## Build process
 
 ### Prerequisites
-* FHIR shirtand compiler (sushi) and the IG publisher installed locally as described in the [FSH spec](http://hl7.org/fhir/uv/shorthand/2020May/sushi.html#new-ig-publisher-integration-autobuild-configuration)
+* FHIR shortand compiler (sushi) and the IG publisher installed locally as described in the [FSH spec](http://hl7.org/fhir/uv/shorthand/2020May/sushi.html#new-ig-publisher-integration-autobuild-configuration)
 * This repository cloned locally
 * You know enough about FHIR and FSH to make sensible changes
 
@@ -22,6 +23,8 @@ Specifies the structure of a FHIR document to exchange a clinical summary for a 
 * The 'runSushi' script also executes a local javascript script that does a couple of things:
     * It creates a file - examples.md - that has a list of all examples ordered by the profile
     * It creates a Bundle resource for each Composition (found in the examples\composition folder) that contains all the resource instances references by the Composition. Each bundle is added to the examples.md file using a format that allows easy navigation within the bundle.
+* NOTE: presupposes node.js module sync-request is installed (https://www.npmjs.com/package/sync-request)
+
 
 
 ## Folder structure
