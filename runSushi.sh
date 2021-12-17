@@ -1,4 +1,4 @@
-sushi fsh -o . 
+sushi . -o ./output/. 
 
 # create the 2 summary files extensions.xml & profiles.xml. Saves in both /input.. & /fsh/ig-data...
 
