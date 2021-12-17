@@ -1,0 +1,206 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "AUPrimaryCarePatient",
+  "url": "https://aehrc.com/fhir/StructureDefinition/AUPrimaryCarePatient",
+  "version": "0.0.3",
+  "name": "AUPrimaryCarePatient",
+  "title": "AU Primary Care Patient",
+  "status": "active",
+  "description": "Details of a patient including identity, demographic and contacts.\n\n**Extensions**\n\n* Indigenous Status : Aboriginal or Torres Strait Islander origin status for the individual, usually self-identified.\n* Birth Place : Record of place of birth.\n* Date of Arrival : Record of date of arrival in australia.\n* Ethnicity : Use to record information about one or more cultural and ethnic identities, self described by the individual.\n* Gender Identity : Record of personal identity with respect to gender.",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "cda",
+      "uri": "http://hl7.org/v3/cda",
+      "name": "CDA (R2)"
+    },
+    {
+      "identity": "w5",
+      "uri": "http://hl7.org/fhir/fivews",
+      "name": "FiveWs Pattern Mapping"
+    },
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "loinc",
+      "uri": "http://loinc.org",
+      "name": "LOINC code for the element"
+    }
+  ],
+  "kind": "resource",
+  "abstract": false,
+  "type": "Patient",
+  "baseDefinition": "http://hl7.org.au/fhir/StructureDefinition/au-patient",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Patient.extension:birthPlace",
+        "path": "Patient.extension",
+        "sliceName": "birthPlace",
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.extension:indigenousStatus",
+        "path": "Patient.extension",
+        "sliceName": "indigenousStatus",
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.extension:closingTheGapRegistration",
+        "path": "Patient.extension",
+        "sliceName": "closingTheGapRegistration",
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.extension:dateOfArrival",
+        "path": "Patient.extension",
+        "sliceName": "dateOfArrival",
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.extension:ethnicity",
+        "path": "Patient.extension",
+        "sliceName": "ethnicity",
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.extension:genderIdentity",
+        "path": "Patient.extension",
+        "sliceName": "genderIdentity",
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.extension:genderIdentity.valueCodeableConcept",
+        "path": "Patient.extension.valueCodeableConcept",
+        "min": 1,
+        "max": "1",
+        "binding": {
+          "strength": "required",
+          "valueSet": "http://aehrc.com/ValueSet/gendercode"
+        }
+      },
+      {
+        "id": "Patient.active",
+        "path": "Patient.active",
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.name",
+        "path": "Patient.name",
+        "min": 1,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.telecom",
+        "path": "Patient.telecom",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "system"
+            }
+          ],
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Patient.telecom:phone",
+        "path": "Patient.telecom",
+        "sliceName": "phone",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "Patient.telecom:phone.system",
+        "path": "Patient.telecom.system",
+        "min": 1,
+        "fixedCode": "phone",
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.telecom:phone.value",
+        "path": "Patient.telecom.value",
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.telecom:email",
+        "path": "Patient.telecom",
+        "sliceName": "email",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "Patient.telecom:email.system",
+        "path": "Patient.telecom.system",
+        "min": 1,
+        "fixedCode": "email",
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.telecom:email.value",
+        "path": "Patient.telecom.value",
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.birthDate",
+        "path": "Patient.birthDate",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.address",
+        "path": "Patient.address",
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.contact",
+        "path": "Patient.contact",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "relationship.coding.code"
+            }
+          ],
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Patient.contact:emergencyContact",
+        "path": "Patient.contact",
+        "sliceName": "emergencyContact",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "Patient.contact:emergencyContact.relationship.coding.system",
+        "path": "Patient.contact.relationship.coding.system",
+        "patternUri": "http://hl7.org/fhir/ValueSet/patient-contactrelationship"
+      },
+      {
+        "id": "Patient.contact:emergencyContact.relationship.coding.code",
+        "path": "Patient.contact.relationship.coding.code",
+        "min": 1,
+        "patternCode": "C",
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.contact:emergencyContact.telecom.system",
+        "path": "Patient.contact.telecom.system",
+        "patternCode": "phone",
+        "mustSupport": true
+      }
+    ]
+  }
+}

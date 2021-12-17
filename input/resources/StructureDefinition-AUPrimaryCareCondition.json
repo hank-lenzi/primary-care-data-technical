@@ -1,0 +1,147 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "AUPrimaryCareCondition",
+  "url": "https://aehrc.com/fhir/StructureDefinition/AUPrimaryCareCondition",
+  "version": "0.0.3",
+  "name": "AUPrimaryCareCondition",
+  "title": "AU Primary Care Condition",
+  "status": "active",
+  "description": "Details about a single identified health condition, injury, disability or any other issue which impacts on the physical, mental and/or social well-being of an individual.\n\n**Usage**\n\n* Use to record details about a single, identified health problem or diagnosis.\n* Clear delineation between the scope of a problem versus a diagnosis is often not easy to achieve in practice. For the purposes of clinical documentation using this item, problem and diagnosis are regarded as a continuum, with increasing information and reaching or exceeding diagnostic criteria supporting formalisation of the label of 'diagnosis'. It is not necessary to classify the condition as a 'problem' or 'diagnosis', especially as a problem may evolve into a formal diagnosis as evidence is gathered. The data requirements to support documentation of either are identical, with additional data structure required to support inclusion of the evidence if and when it becomes available. In practice, most problems or diagnoses do not sit at either end of the problem-diagnosis spectrum, but somewhere in between.\n\n**Misuse**\n\n* Not to be used to describe reasons for encounter - use the 'Reason for encounter' item.\n* Not to be used to describe procedures - use the 'Procedure' item.\n* Not to be used to describe adverse reactions - use the 'Adverse reaction' item.\n* Not to be used to describe symptoms, examination findings, diagnostic test results or health risk assessments.\n* Not to be used to describe differential diagnoses.",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "workflow",
+      "uri": "http://hl7.org/fhir/workflow",
+      "name": "Workflow Pattern"
+    },
+    {
+      "identity": "sct-concept",
+      "uri": "http://snomed.info/conceptdomain",
+      "name": "SNOMED CT Concept Domain Binding"
+    },
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "w5",
+      "uri": "http://hl7.org/fhir/fivews",
+      "name": "FiveWs Pattern Mapping"
+    },
+    {
+      "identity": "sct-attr",
+      "uri": "http://snomed.org/attributebinding",
+      "name": "SNOMED CT Attribute Binding"
+    }
+  ],
+  "kind": "resource",
+  "abstract": false,
+  "type": "Condition",
+  "baseDefinition": "http://hl7.org.au/fhir/StructureDefinition/au-condition",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Condition.meta.lastUpdated",
+        "path": "Condition.meta.lastUpdated",
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.extension:bodySiteReference",
+        "path": "Condition.extension",
+        "sliceName": "bodySiteReference",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/bodySite"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.clinicalStatus",
+        "path": "Condition.clinicalStatus",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.verificationStatus",
+        "path": "Condition.verificationStatus",
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.severity",
+        "path": "Condition.severity",
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.code",
+        "path": "Condition.code",
+        "short": "Coding of a condition, may also describe abscence of condition",
+        "min": 1,
+        "mustSupport": true,
+        "binding": {
+          "strength": "preferred",
+          "valueSet": "http://aehrc.com/ValueSet/conditoncode"
+        }
+      },
+      {
+        "id": "Condition.code.coding",
+        "path": "Condition.code.coding",
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.bodySite",
+        "path": "Condition.bodySite",
+        "short": "Body site for named body site",
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.subject",
+        "path": "Condition.subject",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://aehrc.com/fhir/StructureDefinition/AUPrimaryCarePatient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.onsetDateTime",
+        "path": "Condition.onsetDateTime",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.note",
+        "path": "Condition.note",
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.note.text",
+        "path": "Condition.note.text",
+        "mustSupport": true
+      }
+    ]
+  }
+}

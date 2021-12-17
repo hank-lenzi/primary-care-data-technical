@@ -1,0 +1,135 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "AUPrimaryCareEncounter",
+  "url": "https://aehrc.com/fhir/StructureDefinition/AUPrimaryCareEncounter",
+  "version": "0.0.3",
+  "name": "AUPrimaryCareEncounter",
+  "title": "AU Primary Care Encounter",
+  "status": "active",
+  "description": "Record of a patient encounter including timing, reason, type and participating practitoner.\n\n**Usage**\n\nReason for Encounter - Use to record the reason, or reasons, for initiation of any type of healthcare encounter or contact between a healthcare provider and an individual who is the subject of care. The reason may be for clinical, social or administrative purposes.\n",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "workflow",
+      "uri": "http://hl7.org/fhir/workflow",
+      "name": "Workflow Pattern"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    },
+    {
+      "identity": "w5",
+      "uri": "http://hl7.org/fhir/fivews",
+      "name": "FiveWs Pattern Mapping"
+    },
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    }
+  ],
+  "kind": "resource",
+  "abstract": false,
+  "type": "Encounter",
+  "baseDefinition": "http://hl7.org.au/fhir/StructureDefinition/au-encounter",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Encounter.status",
+        "path": "Encounter.status",
+        "patternCode": "finished"
+      },
+      {
+        "id": "Encounter.class",
+        "path": "Encounter.class",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.subject",
+        "path": "Encounter.subject",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://aehrc.com/fhir/StructureDefinition/AUPrimaryCarePatient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.participant",
+        "path": "Encounter.participant",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "type.code"
+            }
+          ],
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Encounter.participant:primaryperformer",
+        "path": "Encounter.participant",
+        "sliceName": "primaryperformer",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.participant:primaryperformer.type",
+        "path": "Encounter.participant.type",
+        "min": 1,
+        "max": "1",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "PPRF",
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.participant:primaryperformer.individual.type",
+        "path": "Encounter.participant.individual.type",
+        "min": 1,
+        "patternUri": "Practitioner",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.participant:primaryperformer.individual.display",
+        "path": "Encounter.participant.individual.display",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.period",
+        "path": "Encounter.period",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.reasonCode",
+        "path": "Encounter.reasonCode",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.serviceProvider",
+        "path": "Encounter.serviceProvider",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.serviceProvider.display",
+        "path": "Encounter.serviceProvider.display",
+        "mustSupport": true
+      }
+    ]
+  }
+}
